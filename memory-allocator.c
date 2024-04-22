@@ -39,6 +39,11 @@ void malloc(unsigned nbytes){
 			}
 			freep=prevp;
 			return (void *) (p+1);
+		} 
+		if(p==freep){
+			if((p=morecore(nunits))==NULL){
+				return NULL;
+			}
 		}
 	}
 
