@@ -49,3 +49,19 @@ void malloc(unsigned nbytes){
 
 }
 
+#define NALLOC = 1024;
+
+static Header *morecore(unsigned nunits){
+	char *cp, *sbrk(int)
+	Header *up;
+	
+	if(nunits<NALLOC) nunits = NALLOC;
+	
+	cp = sbrk(nunits*sizeof(Header));
+	if(cp == (char *) -1)
+		return NULL;
+	up = (Header *) cp;
+	up->s.size = nunits;
+	free((void *) (up+1));
+	return freep;
+}
