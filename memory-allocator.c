@@ -65,3 +65,15 @@ static Header *morecore(unsigned nunits){
 	free((void *) (up+1));
 	return freep;
 }
+
+
+void free(void *ap){
+	Header *bp, *p;
+	
+	bp = (Header *)ap - 1;
+	for(p=freep; !(bp>p && bp<p->s.ptr); p=p->s.ptr){
+		if(p>=p->s.ptr && (bp>p || bp<p->s.ptr))
+			break;
+	}
+
+}
