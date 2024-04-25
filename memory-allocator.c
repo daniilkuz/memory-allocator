@@ -75,5 +75,9 @@ void free(void *ap){
 		if(p>=p->s.ptr && (bp>p || bp<p->s.ptr))
 			break;
 	}
-
+	if(bp + bp->size == p){
+		bp->s.size += p->s.ptr->s.size;
+		bp->s.ptr = p->s.ptr->s.ptr;
+	}
+	}
 }
